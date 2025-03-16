@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, ShoppingBag, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isAuth, setIsAuth] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="bg-white border-b-1 border-gray-400 p-4 flex justify-between items-center">
+    <div className="bg-white border-b-1 p-4 flex justify-between items-center">
       <Link className="font-bold text-2xl flex items-center" to="/">
         <ShoppingBag /><span className="text-blue-600">E</span>-Sol
       </Link>
@@ -38,8 +39,8 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/login"><button className="text-white cursor-pointer rounded-3xl bg-blue-600 p-1 px-2 hover:bg-blue-700">Login</button></Link>
-            <Link to="/register"><button className="text-white cursor-pointer rounded-3xl bg-red-600 p-1 px-2 hover:bg-red-700">Register</button></Link>
+            <Link to="/login"><Button className="text-white cursor-pointer rounded-lg bg-blue-600 p-1 px-3 hover:bg-blue-700">Login</Button></Link>
+            <Link to="/register"><Button className="text-white cursor-pointer rounded-lg bg-red-600 p-1 px-3 hover:bg-red-700">Register</Button></Link>
           </>
         )}
       </div>
