@@ -13,6 +13,9 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Layout from './pages/View/Layout';
 import Cart from './pages/Shopping/Cart';
+import Dashboard from './components/Admin-Views/Dashboard';
+import Orders from './components/Admin-Views/Orders';
+import Products from './components/Admin-Views/Products';
 
 const App = () => {
   return (
@@ -22,7 +25,6 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="admin" element={<Admin />} />
           <Route path="men" element={<Men />} />
           <Route path="women" element={<Women />} />
           <Route path="kids" element={<Kids />} />
@@ -31,7 +33,11 @@ const App = () => {
           <Route path="footwear" element={<Footwear />} />
           <Route path="cart" element={<Cart />} />
         </Route>
-
+        <Route path="/admin" element={<Admin />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="products" element={<Products />} />
+        </Route>
         {/* Routes outside the Layout */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
