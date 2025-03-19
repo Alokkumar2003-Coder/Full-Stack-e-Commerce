@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Title } from "@radix-ui/react-toast";
 
 const Users = () => {
   const [users, setUsers] = useState([{ id: {}, username: "", email: "" }]);
