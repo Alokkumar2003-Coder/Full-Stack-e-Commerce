@@ -41,6 +41,7 @@ const App = () => {
         {/* Routes outside the Layout */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        
       </Routes>
     </Router>
   );
