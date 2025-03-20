@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 
 const ImageUpload = () => {
-  const [images, setImages] = useState([null, null, null, null]);
+  const [images, setImages] = useState([]);
 
   const handleImageChange = (index, event) => {
     const file = event.target.files[0];
+
     if (file) {
+      if (!file.type.startsWith("image/")) {
+        alert("Please upload a valid image file!");
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size should be less than 5MB!");
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setImages((prevImages) => {
@@ -18,109 +29,96 @@ const ImageUpload = () => {
     }
   };
 
+  const removeImage = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
   return (
-    <div className="left-2  mt-7 max-w-3xl mx-auto bg-white text-black shadow-md rounded-md p-6 h-[90vh] overflow-y-auto">
-      <button className="absolute top-2 right-6 bg-black text-white px-4 py-2 rounded-md shadow-md hover:bg-grey-600">
-        Logout
-      </button>
-      <p className=" font-semibold ">Upload Images</p>
-      <div className="mt-2 flex flex-wrap gap-4">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className="mt-2 p-3 border rounded shadow-md w-32 text-center"
-          >
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(event) => handleImageChange(index, event)}
-              className="mb-2 w-full"
-            />
-            {image && (
-              <img
-                src={image}
-                alt="Preview"
-                className="w-full h-20 object-cover rounded mb-2"
+    <div className="min-h-screen">
+      <h1 className="font-bold">Add Product</h1>
+      <div className="flex justify-center">
+      <div className="p-6 w-full max-w-2xl">
+        <h2 className="text-center text-xl font-semibold text-gray-700">Upload Product Images</h2>
+        <div className="mt-4 flex flex-wrap justify-center gap-4">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className="h-20 w-full sm:w-48 flex justify-center items-center p-2 border rounded-md shadow-md bg-gray-50">
+              <div className="relative left-12">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => handleImageChange(index, event)}
+                className=" text-sm text-gray-600"
               />
-            )}
-            <button className="bg-blue-500 text-white px-2 py-1 rounded text-sm">
-              Upload
-            </button>
-          </div>
-        ))}
-      </div>
-
-      <div className="w-full mt-4">
-        <p className="mt-6">Product Name</p>
-        <input
-          className="w-full max-w-[500px] px-3 py-2 mt-1 border rounded"
-          type="text"
-          placeholder="Type here"
-          required
-        />
-      </div>
-
-      <div className="w-full">
-        <p className="mt-5">Product Description</p>
-        <textarea
-          className="mt-1 w-full max-w-[500px] px-3 py-2 border rounded"
-          placeholder="Write content here"
-          required
-        ></textarea>
-      </div>
-
-      <div className="flex flex-col sm:flex-row gap-4 w-full mt-4">
-        <div>
-          <p className="mb-2">Product Category</p>
-          <select className="w-full px-3 py-2 border rounded ">
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Kids">Kids</option>
-          </select>
-        </div>
-        <div>
-          <p className="mb-2">Sub Category</p>
-          <select className="w-full px-3 py-2 border rounded text-black">
-            <option value="Topwear">Topwear</option>
-            <option value="Bottomwear">Bottomwear</option>
-            <option value="Winterwear">Winterwear</option>
-          </select>
-        </div>
-        <div>
-          <p className="mb-2">Product Price (INR)</p>
-          <input
-            className="w-full px-3 py-2 border rounded text-black"
-            type="number"
-            placeholder="Enter Price"
-          />
-        </div>
-      </div>
-
-      <div className="mt-5">
-        <p>Product Sizes</p>
-        <div className="flex flex-wrap gap-3 text-black">
-          {["S", "M", "L", "XL", "XXL"].map((size) => (
-            <p
-              key={size}
-              className="bg-gray-200 mt-2 px-4 py-2 cursor-pointer rounded shadow-md text-center"
-            >
-              {size}
-            </p>
+              </div>
+              {images[index] && (
+                <div className="relative mt-2">
+                  <img src={images[index]} alt="Preview" className="w-full h-24 object-cover rounded" />
+                  <button
+                    onClick={() => removeImage(index)}
+                    className="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded-full"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
+            </div>
           ))}
         </div>
-      </div>
+        <div className="mt-6">
+          <label className="block font-medium">Product Name</label>
+          <input className="w-full px-3 py-2 border rounded mt-1" type="text" placeholder="Enter product name" required />
+        </div>
 
-      <div className="flex gap-2 mt-6">
-        <input type="checkbox" id="bestseller" />
-        <label className="cursor-pointer" htmlFor="bestseller">
-          <b>Add to Bestseller</b>
-        </label>
-      </div>
+        <div className="mt-4">
+          <label className="block font-medium">Product Description</label>
+          <textarea className="w-full px-3 py-2 border rounded mt-1" placeholder="Write product description" required></textarea>
+        </div>
 
-      <div className="flex justify-center mt-6">
-        <button type="submit" className="px-6 py-2 bg-black text-white rounded">
-          ADD PRODUCT
-        </button>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+          <div>
+            <label className="block font-medium">Category</label>
+            <select className="w-full px-3 py-2 border rounded mt-1">
+              <option>Men</option>
+              <option>Women</option>
+              <option>Kids</option>
+            </select>
+          </div>
+          <div>
+            <label className="block font-medium">Sub Category</label>
+            <select className="w-full px-3 py-2 border rounded mt-1">
+              <option>Topwear</option>
+              <option>Bottomwear</option>
+              <option>Winterwear</option>
+            </select>
+          </div>
+          <div>
+            <label className="block font-medium">Price (INR)</label>
+            <input className="w-full px-3 py-2 border rounded mt-1" type="number" placeholder="Enter price" />
+          </div>
+        </div>
+        <div className="mt-4">
+          <label className="block font-medium">Available Sizes</label>
+          <div className="flex flex-wrap gap-3 mt-2">
+            {["S", "M", "L", "XL", "XXL"].map((size) => (
+              <span key={size} className="bg-gray-200 px-3 py-2 rounded shadow-md cursor-pointer">
+                {size}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="flex items-center mt-4">
+          <input type="checkbox" id="bestseller" className="mr-2" />
+          <label htmlFor="bestseller" className="cursor-pointer font-medium">
+            Add to Bestseller
+          </label>
+        </div>
+
+        <div className="flex justify-center mt-6">
+          <button className="cursor-pointer px-6 py-2 bg-black text-white rounded shadow-md hover:bg-gray-800 transition">
+            ADD PRODUCT
+          </button>
+        </div>
+      </div>
       </div>
     </div>
   );

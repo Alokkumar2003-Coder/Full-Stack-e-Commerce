@@ -15,7 +15,7 @@ import Layout from './pages/View/Layout';
 import Cart from './pages/Shopping/Cart';
 import Dashboard from './components/Admin-Views/Dashboard';
 import Orders from './components/Admin-Views/Orders';
-import Products from './components/Admin-Views/Products';
+import Users from './components/Admin-Views/Users';
 
 const App = () => {
   return (
@@ -36,7 +36,7 @@ const App = () => {
         <Route path="/admin" element={<Admin />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="orders" element={<Orders />} />
-          <Route path="products" element={<Products />} />
+          <Route path="users" element={<Users />} />
         </Route>
         {/* Routes outside the Layout */}
         <Route path="/login" element={<Login />} />

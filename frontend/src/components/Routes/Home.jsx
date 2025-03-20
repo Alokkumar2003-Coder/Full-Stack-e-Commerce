@@ -8,8 +8,6 @@ import {
 import {
   Airplay,
   BabyIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
   CloudLightning,
   Heater,
   Images,
@@ -20,6 +18,7 @@ import {
   WashingMachine,
   WatchIcon,
 } from "lucide-react";
+import Compo from "../../pages/Shopping/Card";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Home = () => {
@@ -46,7 +45,7 @@ const Home = () => {
     { id: "accessories", label: "Accessories", icon: WatchIcon },
     { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
   ];
-  
+
   const brandsWithIcon = [
     { id: "nike", label: "Nike", icon: Shirt },
     { id: "adidas", label: "Adidas", icon: WashingMachine },
@@ -57,7 +56,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       <div className="w-full">
         <Carousel plugins={autoplay ? [autoplay] : []} className="w-full">
           <CarouselContent className="h-full">
@@ -66,49 +65,45 @@ const Home = () => {
                 <img
                   src={image}
                   alt={`Banner ${index + 1}`}
-                  className="w-full max-w-full h-40 sm:h-80 md:h-96 lg:h-[300px] xl:h-[500px] object-cover"
+                  className="w-full max-w-full h-40 sm:h-80 md:h-96 lg:h-[350px] xl:h-[500px] object-cover"
                 />
               </CarouselItem>
             ))}
           </CarouselContent>
         </Carousel>
       </div>
-      <section className="mt-12">
+      <section className="mt-12 w-full">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            Shop by category
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <h2 className="text-3xl font-bold text-center mb-8">Shop by category</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {categoriesWithIcon.map((categoryItem) => (
-              <Card
-                className="cursor-pointer hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <categoryItem.icon className="w-82 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{categoryItem.label}</span>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+                <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6">
+                  <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
+                  <span className="font-bold text-sm sm:text-base">{categoryItem.label}</span>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
-      <section className="mt-12">
+      <section className="mt-12 w-full">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {brandsWithIcon.map((brandItem) => (
-              <Card
-                onClick={() => handleNavigateToListingPage(brandItem, "brand")}
-                className="cursor-pointer hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <brandItem.icon className="w-72 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{brandItem.label}</span>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+                <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6">
+                  <brandItem.icon className="w-12 h-12 mb-4 text-primary" />
+                  <span className="font-bold text-sm sm:text-base">{brandItem.label}</span>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
+      </section>
+      <section className="mt-10 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-2 sm:p-6 gap-2">
+        <Compo />
       </section>
     </div>
   );
