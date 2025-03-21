@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import Logout from "../../pages/Auth/Logout";
+import { Menu, X } from "lucide-react"; 
+import Bg from "../../../public/images/admin-img.png"
 
 const Admin = () => {
   const location = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="h-screen bg-blue-200 flex">
-      <nav className="bg-white p-10 h-full w-60 shadow-lg">
-        <ul className="flex flex-col gap-6">
+    <div className="flex min-h-screen">
+      <nav
+        className={`fixed inset-y-0 left-0 z-50 bg-white p-6 w-64 shadow-lg transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:w-60`}
+      >
+        <div className="flex justify-between items-center md:hidden">
+          <h2 className="text-lg font-bold">Admin Panel</h2>
+          <button onClick={() => setIsSidebarOpen(false)}>
+            <X size={24} />
+          </button>
+        </div>
+
+        <ul className="flex flex-col gap-6 mt-6">
           <li>
             <NavLink
               to="dashboard"
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-bold" : "text-gray-700"
               }
+              onClick={() => setIsSidebarOpen(false)}
             >
               Dashboard
             </NavLink>
@@ -24,29 +40,47 @@ const Admin = () => {
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-bold" : "text-gray-700"
               }
+              onClick={() => setIsSidebarOpen(false)}
             >
               Orders
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="products"
+              to="users"
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-bold" : "text-gray-700"
               }
+              onClick={() => setIsSidebarOpen(false)}
             >
-              Products
+              Active Users
             </NavLink>
           </li>
+          <Logout />
         </ul>
       </nav>
 
-      <main className="flex-1 p-6 bg-white shadow-md">
+    
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
+    
+      <main className="flex-1 bg-white shadow-md">
+        <button
+          className="md:hidden mb-4 text-gray-700"
+          onClick={() => setIsSidebarOpen(true)}
+        >
+          <Menu size={24} className="absolute top-1 left-1"/>
+        </button>
+
         {location.pathname === "/admin" ? (
-          <div className="flex justify-center items-center h-screen">
-            <h1 className="text-2xl font-bold text-gray-800 text-center">
-              Welcome to the Admin Panel
-            </h1>
+          <div className="bg-green-200 flex flex-col justify-center items-center h-screen">
+            <img src={Bg} alt="" className="h-96"/>
+            <h1 className="text-3xl font-bold text-center p-2">Welcome To The Admin Panel</h1>
           </div>
         ) : (
           <Outlet />

@@ -15,20 +15,13 @@ const User = new mongoose.Schema(
       type: String,
       required: true,
     },
-    phone:{
-      type:String,
-      required:true
-    },
-    address:{
-      type:String,
-      required:true
-    },
-    role:{
-      type:Number,
-      default: 0
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User",User);
+module.exports = mongoose.model("User", User);

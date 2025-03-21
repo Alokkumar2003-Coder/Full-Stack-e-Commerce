@@ -3,19 +3,16 @@ import React from "react";
 
 const Orders = () => {
   return (
-    <div className="orders">
-      <div className="text-2xl px-4">
+    <div className="">
+      <div className="text-2xl">
         <Title text1={"My"} text2={"ORDERS"} />
       </div>
-      <button className="absolute top-2 right-6 bg-black text-white px-4 py-2 rounded-md shadow-md hover:bg-grey-600">
-        Logout
-      </button>
-      <div className="px-4 py-4">
+      <div className="h-full">
         <b>Order Page</b>
-        {[...Array(2)].map((_, index) => (
+        {[...Array(100)].map((_, index) => (
           <div
             key={index}
-            className="mt-5 py-4 border-t border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            className="mt-5 py-4 border rounded p-4 text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               
             <div className="flex items-start gap-6 text-sm">
               <img

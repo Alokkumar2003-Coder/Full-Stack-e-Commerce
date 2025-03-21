@@ -17,10 +17,15 @@ const Product = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
+      min: 0,
     },
     stock: {
       type: Number,
       required: true,
+      min: 0,
+    },
+    offer: {
+      type: Number,
       min: 0,
     },
     category: {
@@ -31,4 +36,4 @@ const Product = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Product",Product);
+module.exports = mongoose.model("Product", Product);
