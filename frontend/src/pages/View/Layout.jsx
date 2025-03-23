@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-  <header className="fixed w-full z-20">
+  <header className="fixed w-full z-50">
     <Navbar />
   </header>
   <main className="flex-1 pt-16">

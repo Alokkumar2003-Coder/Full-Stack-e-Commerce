@@ -71,12 +71,22 @@ const Interface = [
     price: "Rs 1999.00",
     seller: "BestSeller",
   },
+  {
+    img:puma,
+    title: "Mens Running Puma Shoes",
+    description: "Puma Shoes for mens",
+    category: "Men",
+    subcategory: "bottomwear",
+    size: "L",
+    price: "Rs 1999.00",
+    seller: "BestSeller",
+  },
 ];
 const Card = () => {
   return (
     <>
         {Interface.map((card, index) => (
-          <div key={index} className="border p-4 shadow-lg flex flex-col text-left">
+          <div key={index} className="border p-4 shadow-lg flex flex-col text-left hover:scale-102 duration-300">
             <p className="z-10 cursor-pointer relative bottom-2 right-4 shadow-sm w-20 font-semibold bg-yellow-500 text-center text-sm text-white">{card.seller}</p>
             <img src={card.img} alt="" className="sm:h-full md:h-full min-w-32 relative bottom-6 "/>
             <h1 className="font-bold">{card.title}</h1>
