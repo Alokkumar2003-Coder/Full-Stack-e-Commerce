@@ -16,7 +16,7 @@ const Navbar = () => {
         <span className="text-blue-600">E</span>-Sol
       </Link>
 
-\      <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
