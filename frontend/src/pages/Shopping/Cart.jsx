@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import shoe from "../../../public/images/61VHvg7wvCL._SY500_.jpg";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
@@ -78,9 +79,11 @@ const Cart = () => {
             <span>Total</span>
             <span>₹{total.toFixed(2)}</span>
           </div>
+          <Link to="/myorders">
           <button className="cursor-pointer mt-6 w-full sm:w-auto bg-blue-500 text-white p-2 text-lg font-semibold rounded">
             Proceed To Checkout
           </button>
+          </Link>
         </div>
       </div>
     </div>

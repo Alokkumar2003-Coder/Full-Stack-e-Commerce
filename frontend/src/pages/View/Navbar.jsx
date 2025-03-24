@@ -62,7 +62,7 @@ const Navbar = () => {
 
       <div className="cart-img text-2xl font-semibold">
         <Link to="/cart">
-          <ShoppingCart size={32} strokeWidth={2.5} className="text-black" />
+          <ShoppingCart size={24} strokeWidth={2.5} className="text-black" />
         </Link>
       </div>
     </div>
