@@ -16,6 +16,7 @@ import Cart from './pages/Shopping/Cart';
 import Dashboard from './components/Admin-Views/Dashboard';
 import Orders from './components/Admin-Views/Orders';
 import Users from './components/Admin-Views/Users';
+import MyOrders from './pages/Shopping/MyOrders';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="search" element={<Search />} />
           <Route path="footwear" element={<Footwear />} />
           <Route path="cart" element={<Cart />} />
+          <Route path='/myorders' element={<MyOrders/>}/>
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="dashboard" element={<Dashboard />} />
