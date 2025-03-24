@@ -13,9 +13,8 @@ const Navbar = () => {
         <ShoppingBag />
         <span className="text-blue-600">E</span>-Sol
       </Link>
-      <Link to="/cart">
-              <ShoppingCart />
-            </Link>
+    
+
       <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
@@ -42,6 +41,7 @@ const Navbar = () => {
               Profile
             </Link>
           </>
+          
         ) : (
           <>
             <Link to="/login">
@@ -57,6 +57,12 @@ const Navbar = () => {
           </>
         )}
       </div>
+
+      <div className="cart-img text-2xl font-semibold ">
+      <Link to="/cart">
+      <ShoppingCart size={32} strokeWidth={2.5} className="text-black" />            </Link>
+      </div>
+
     </div>
   );
 };

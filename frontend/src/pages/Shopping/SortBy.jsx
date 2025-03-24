@@ -12,13 +12,13 @@ const SortBy = () => {
   ];
 
   return (
-    <div className="relative w-26">
+    <div className="relative w-30">
       <div
         className="flex items-center border border-gray-300 rounded-md px-4 py-2 cursor-pointer bg-white"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="mr-1 font-semibold text-sm text-center">Sort By</span>
-        <span>{selectedOption}</span>
+        {/* <span className="mr-1 font-semibold text-Xs text-center">Sort By</span> */}
+        <span className="mr-1 font-semibold text-xs text-center">{selectedOption || "Sort by"}</span>
         {isOpen ? (
           <ArrowUpDown className="w-4 h-4"/>
         ) : (
