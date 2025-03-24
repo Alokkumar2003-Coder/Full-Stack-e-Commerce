@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { adminAuth, auth } = require("../middleware/adminAuth");
+const auth = require("../middleware/AuthMiddleware");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
 const User = require("../models/User");
+
+
+// -----------------------------------------------------------------------------------------------------------------------
 
 // Get all products
 router.get("/get-products", auth, async (req, res) => {
@@ -15,6 +18,10 @@ router.get("/get-products", auth, async (req, res) => {
   }
 });
 
+
+// -----------------------------------------------------------------------------------------------------------------------
+
+
 // Get all orders
 router.get("orders", auth, async (req, res) => {
   try {
@@ -24,5 +31,9 @@ router.get("orders", auth, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
+// -----------------------------------------------------------------------------------------------------------------------
+
 
 module.exports = router;

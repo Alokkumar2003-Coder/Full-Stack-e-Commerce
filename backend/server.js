@@ -1,4 +1,3 @@
-
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -6,11 +5,11 @@ const cookieParser = require("cookie-parser");
 const userApi = require("./routes/UserRoute");
 const productApi = require("./routes/Product");
 const adminApi = require('./routes/AdminRoute')
-
 const Db = require("./controllers/Db");
 
 dotenv.config();
 Db()
+require("./controllers/Redis")
 const app = express();
 const PORT = process.env.PORT || 5000;
 
