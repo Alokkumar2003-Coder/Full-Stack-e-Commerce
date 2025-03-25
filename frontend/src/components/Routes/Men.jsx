@@ -1,10 +1,25 @@
-import React, { useState } from "react";
-import Compo from "../../pages/Shopping/Card";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Card from "../../pages/Shopping/Card";
 import Filter from "@/pages/Shopping/Filter";
 import SortBy from "@/pages/Shopping/SortBy";
 
 const Men = () => {
   const [showFilter, setShowFilter] = useState(false);
+  const [items, setItems] = useState([]);
+
+  const fetchItemsByCategory = async (category) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/v1/product/items?category=${category}`);
+      setItems(response.data);
+    } catch (error) {
+      console.error("Error fetching items:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchItemsByCategory("Men");
+  }, []);
 
   return (
     <div className="min-h-screen p-4">
@@ -25,7 +40,7 @@ const Men = () => {
           }`}
         >
           <button
-            className="md:hidden absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded"
+            className="md:hidden absolute top-4 right-20 bg-red-500 text-white px-3 py-1 rounded"
             onClick={() => setShowFilter(false)}
           >
             X
@@ -39,7 +54,11 @@ const Men = () => {
           </div>
 
           <section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <Compo />
+            {items.length > 0 ? (
+              items.map((item, index) => <Card key={index} item={item} />)
+            ) : (
+              <p className="text-center col-span-full">No items found.</p>
+            )}
           </section>
         </div>
       </div>

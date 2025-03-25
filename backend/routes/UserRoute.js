@@ -2,26 +2,29 @@ const router = require("express").Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const auth = require("../middleware/AuthMiddleware")
+const auth = require("../middleware/AuthMiddleware");
 
 // -----------------------------------------------------------------------------------------------------------------------
-
 
 // Register Route
 router.post("/register", async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, isAdmin } = req.body;
 
     if (!username || !email || !password) {
       return res.status(400).json({ message: "All Fields are Required" });
     }
 
     if (username.length < 5) {
-      return res.status(400).json({ message: "Username must be at least 5 characters long" });
+      return res
+        .status(400)
+        .json({ message: "Username must be at least 5 characters long" });
     }
 
     if (password.length < 8) {
-      return res.status(400).json({ message: "Password must be at least 8 characters long" });
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 8 characters long" });
     }
 
     const existingUser = await User.findOne({ email });
@@ -32,7 +35,13 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+      isAdmin: isAdmin || false, // Default isAdmin to false if not provided
+    });
+
     await newUser.save();
 
     return res.status(201).json({ message: "User Created Successfully" });
@@ -41,9 +50,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
 // -----------------------------------------------------------------------------------------------------------------------
-
 
 // Login Route
 router.post("/login", async (req, res) => {
@@ -65,7 +72,11 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: existingUser.id, email: existingUser.email },
+      {
+        id: existingUser.id,
+        email: existingUser.email,
+        isAdmin: existingUser.isAdmin,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
     );
@@ -73,14 +84,15 @@ router.post("/login", async (req, res) => {
     res.cookie("solToken", token, {
       httpOnly: true,
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      secure: process.env.NODE_ENV === "production" ? true : false, // Allow in dev
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
     });
 
     return res.status(200).json({
       id: existingUser.id,
       username: existingUser.username,
       email: existingUser.email,
+      isAdmin: existingUser.isAdmin, // Ensure this is sent
       message: "Login Successful",
     });
   } catch (error) {
@@ -88,9 +100,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
 // -----------------------------------------------------------------------------------------------------------------------
-
 
 // Logout Route
 router.post("/logout", (req, res) => {
@@ -102,9 +112,7 @@ router.post("/logout", (req, res) => {
   }
 });
 
-
 // -----------------------------------------------------------------------------------------------------------------------
-
 
 // Check if cookie exists
 router.get("/check-cookie", (req, res) => {
@@ -119,17 +127,14 @@ router.get("/check-cookie", (req, res) => {
   }
 });
 
-
 // -----------------------------------------------------------------------------------------------------------------------
-
-
 
 // User Detail Route
 router.get("/user-details", auth, async (req, res) => {
   try {
     const { email } = req.user;
     const existingUser = await User.findOne({ email });
-    
+
     if (!existingUser) {
       return res.status(404).json({ message: "User Not Found" });
     }
@@ -139,7 +144,6 @@ router.get("/user-details", auth, async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
 
 // -----------------------------------------------------------------------------------------------------------------------
 
