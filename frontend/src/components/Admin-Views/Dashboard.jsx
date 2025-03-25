@@ -34,7 +34,7 @@ const ImageUpload = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen p-6">
       <h1 className="font-bold">Add Product</h1>
       <div className="flex justify-center">
       <div className="p-6 w-full max-w-2xl">

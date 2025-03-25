@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, Outlet, useLocation, Link } from "react-router-dom"; // Import Link
+import { NavLink, Outlet } from "react-router-dom";
 import Logout from "../../pages/Auth/Logout";
-import { Menu, X, ArrowLeft } from "lucide-react"; // Import ArrowLeft
+import { Menu, X } from "lucide-react";
 import Bg from "../../../public/images/admin-img.png";
 
 const Admin = () => {
-  const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -15,9 +14,6 @@ const Admin = () => {
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:w-60`}
       >
-        <Link to="/" className="text-black hover:text-black">
-          <ArrowLeft size={25} />
-        </Link>
         <div className="flex justify-between items-center">
           <h2 className="mt-6 text-lg font-bold ml-0">Admin Panel</h2>
           <button className="md:hidden" onClick={() => setIsSidebarOpen(false)}>

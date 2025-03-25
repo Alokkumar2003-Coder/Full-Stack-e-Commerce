@@ -19,7 +19,7 @@ const Navbar = () => {
       <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
-           
+
       <div
         className={`absolute md:static top-16 left-0 w-full md:w-auto z-50 bg-white flex flex-col md:flex-row md:items-center gap-4 p-4 md:p-0 transition-transform font-semibold ${
           isMenuOpen ? "block" : "hidden md:flex"
@@ -27,14 +27,34 @@ const Navbar = () => {
       >
         {isAuth ? (
           <>
-            <Link to="/" onClick={closeMenu}>Home</Link>
-            <Link to="/men" onClick={closeMenu}>Men</Link>
-            <Link to="/women" onClick={closeMenu}>Women</Link>
-            <Link to="/kids" onClick={closeMenu}>Kids</Link>
-            <Link to="/accessories" onClick={closeMenu}>Accessories</Link>
-            <Link to="/footwear" onClick={closeMenu}>Footwear</Link>
-            <Link to="/search" onClick={closeMenu}>Search</Link>
-            <Link to="/admin" onClick={closeMenu}>Admin</Link>
+            <Link to="/" onClick={closeMenu}>
+              Home
+            </Link>
+            <Link to="/men" onClick={closeMenu}>
+              Men
+            </Link>
+            <Link to="/women" onClick={closeMenu}>
+              Women
+            </Link>
+            <Link to="/kids" onClick={closeMenu}>
+              Kids
+            </Link>
+            <Link to="/accessories" onClick={closeMenu}>
+              Accessories
+            </Link>
+            <Link to="/footwear" onClick={closeMenu}>
+              Footwear
+            </Link>
+            <Link to="/search" onClick={closeMenu}>
+              Search
+            </Link>
+            <Link to="/cart">
+              <ShoppingCart
+                size={24}
+                strokeWidth={2.5}
+                className="text-black"
+              />
+            </Link>
             <Link
               to="profile/"
               className="text-white rounded-lg bg-gray-700 p-1 px-3 hover:bg-gray-900"
@@ -57,12 +77,6 @@ const Navbar = () => {
             </Link>
           </>
         )}
-      </div>
-
-      <div className="cart-img text-2xl font-semibold">
-        <Link to="/cart">
-          <ShoppingCart size={24} strokeWidth={2.5} className="text-black" />
-        </Link>
       </div>
     </div>
   );

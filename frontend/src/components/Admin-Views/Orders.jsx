@@ -3,7 +3,7 @@ import React from "react";
 
 const Orders = () => {
   return (
-    <div className="">
+    <div className="p-6">
       <div className="text-2xl">
         <Title text1={"My"} text2={"ORDERS"} />
       </div>

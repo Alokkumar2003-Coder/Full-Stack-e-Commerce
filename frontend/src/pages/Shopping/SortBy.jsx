@@ -12,12 +12,11 @@ const SortBy = () => {
   ];
 
   return (
-    <div className="relative w-30">
+    <div className="relative">
       <div
-        className="flex items-center border border-gray-300 rounded-md px-4 py-2 cursor-pointer bg-white"
+        className="flex items-center justify-center border border-gray-300 rounded-md p-3 cursor-pointer bg-white"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {/* <span className="mr-1 font-semibold text-Xs text-center">Sort By</span> */}
         <span className="mr-1 font-semibold text-xs text-center">{selectedOption || "Sort by"}</span>
         {isOpen ? (
           <ArrowUpDown className="w-4 h-4"/>
@@ -27,11 +26,11 @@ const SortBy = () => {
       </div>
 
       {isOpen && (
-        <ul className="absolute left-0 w-full bg-white border border-gray-300 mt-1 rounded-md shadow-md z-10">
+        <ul className="absolute left-0 w-full bg-white border border-gray-300 rounded-md shadow-md z-10">
           {sortOptions.map((option, index) => (
             <li
               key={index}
-              className="px-3 py-1 text-sm hover:bg-gray-100 cursor-pointer"
+              className="px-3 py-2 text-sm hover:bg-gray-100 cursor-pointer"
               onClick={() => {
                 setSelectedOption(option);
                 setIsOpen(false);
