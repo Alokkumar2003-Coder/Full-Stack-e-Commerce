@@ -65,7 +65,7 @@ const Home = () => {
                 <img
                   src={image}
                   alt={`Banner ${index + 1}`}
-                  className="w-full max-w-full h-40 sm:h-80 md:h-96 lg:h-[350px] xl:h-[500px] object-cover"
+                  className="w-full max-w-full h-62 sm:h-80 md:h-96 lg:h-[350px] xl:h-[500px] object-cover"
                 />
               </CarouselItem>
             ))}
@@ -74,13 +74,17 @@ const Home = () => {
       </div>
       <section className="mt-12 w-full">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Shop by category</h2>
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Shop by category
+          </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {categoriesWithIcon.map((categoryItem) => (
               <Card className="cursor-pointer hover:shadow-lg transition-shadow">
                 <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6">
                   <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold text-sm sm:text-base">{categoryItem.label}</span>
+                  <span className="font-bold text-sm sm:text-base">
+                    {categoryItem.label}
+                  </span>
                 </CardContent>
               </Card>
             ))}
@@ -95,7 +99,9 @@ const Home = () => {
               <Card className="cursor-pointer hover:shadow-lg transition-shadow">
                 <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6">
                   <brandItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold text-sm sm:text-base">{brandItem.label}</span>
+                  <span className="font-bold text-sm sm:text-base">
+                    {brandItem.label}
+                  </span>
                 </CardContent>
               </Card>
             ))}
