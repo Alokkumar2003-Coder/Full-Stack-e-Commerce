@@ -8,12 +8,12 @@ const Users = () => {
   };
 
   return (
-    <div className="">
+    <div className="p-6">
       <h1 className="font-bold">Active Users</h1>
       <div className="mt-6 col bg-purple-400 rounded-lg p-4 shadow-md">
         <div className="List">
           <b className="text-lg">User List</b>
-          {users.map((user, index) => (
+          {users.map((user) => (
             <div
               key={user.id}
               className="mt-5 py-4 border-t border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-4 rounded-lg shadow-md"

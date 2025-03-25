@@ -48,8 +48,12 @@ const Navbar = () => {
             <Link to="/search" onClick={closeMenu}>
               Search
             </Link>
-            <Link to="/admin" onClick={closeMenu}>
-              Admin
+            <Link to="/cart">
+              <ShoppingCart
+                size={24}
+                strokeWidth={2.5}
+                className="text-black"
+              />
             </Link>
             <Link
               to="profile/"
@@ -73,12 +77,6 @@ const Navbar = () => {
             </Link>
           </>
         )}
-      </div>
-
-      <div className="cart-img text-2xl font-semibold">
-        <Link to="/cart">
-          <ShoppingCart size={24} strokeWidth={2.5} className="text-black" />
-        </Link>
       </div>
     </div>
   );

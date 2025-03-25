@@ -132,16 +132,17 @@ router.get("/check-cookie", (req, res) => {
 // User Detail Route
 router.get("/user-details", auth, async (req, res) => {
   try {
-    const { email } = req.user;
-    const existingUser = await User.findOne({ email });
+    const user = await User.findById(req.user.id); 
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    if (!existingUser) {
-      return res.status(404).json({ message: "User Not Found" });
-    }
-
-    return res.status(200).json({ user: existingUser });
+    res.json({
+      username: user.username,
+      email: user.email,
+      address: user.address,
+      totalOrders: user.totalOrders
+    });
   } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: "Server error" });
   }
 });
 

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Logout from "../../pages/Auth/Logout";
-import { Menu, X } from "lucide-react"; 
-import Bg from "../../../public/images/admin-img.png"
+import { Menu, X } from "lucide-react";
+import Bg from "../../../public/images/admin-img.png";
 
 const Admin = () => {
-  const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -15,9 +14,9 @@ const Admin = () => {
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:w-60`}
       >
-        <div className="flex justify-between items-center md:hidden">
-          <h2 className="text-lg font-bold">Admin Panel</h2>
-          <button onClick={() => setIsSidebarOpen(false)}>
+        <div className="flex justify-between items-center">
+          <h2 className="mt-6 text-lg font-bold ml-0">Admin Panel</h2>
+          <button className="md:hidden" onClick={() => setIsSidebarOpen(false)}>
             <X size={24} />
           </button>
         </div>
@@ -60,27 +59,27 @@ const Admin = () => {
         </ul>
       </nav>
 
-    
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          className="fixed inset-0 left-64 right-0 bg-black bg-opacity-30 z-40 md:hidden"
           onClick={() => setIsSidebarOpen(false)}
         ></div>
       )}
 
-    
       <main className="flex-1 bg-white shadow-md">
         <button
           className="md:hidden mb-4 text-gray-700"
           onClick={() => setIsSidebarOpen(true)}
         >
-          <Menu size={24} className="absolute top-1 left-1"/>
+          <Menu size={24} className="absolute top-1 left-1" />
         </button>
 
         {location.pathname === "/admin" ? (
           <div className="bg-green-200 flex flex-col justify-center items-center h-screen">
-            <img src={Bg} alt="" className="h-96"/>
-            <h1 className="text-3xl font-bold text-center p-2">Welcome To The Admin Panel</h1>
+            <img src={Bg} alt="" className="h-96" />
+            <h1 className="text-3xl font-bold text-center p-2">
+              Welcome To The Admin Panel
+            </h1>
           </div>
         ) : (
           <Outlet />
