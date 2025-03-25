@@ -31,16 +31,19 @@ const Searchs = () => {
         <Search />
       </div>
 
-      {/* Filtered List */}
       <ul className="text-left max-w-xs mx-auto">
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item, index) => (
-            <li key={index} className="p-2 border-b last:border-0">
-              {item}
-            </li>
-          ))
+        {search.trim() ? (
+          filteredItems.length > 0 ? (
+            filteredItems.map((item, index) => (
+              <li key={index} className="p-2 border-b last:border-0">
+                {item}
+              </li>
+            ))
+          ) : (
+            <li className="p-2 text-gray-500">No items found</li>
+          )
         ) : (
-          <li className="p-2 text-gray-500">No items found</li>
+          <li className="p-4 text-gray-500"></li>
         )}
       </ul>
     </div>

@@ -19,8 +19,7 @@ const Navbar = () => {
       <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
-
-     
+           
       <div
         className={`absolute md:static top-16 left-0 w-full md:w-auto z-50 bg-white flex flex-col md:flex-row md:items-center gap-4 p-4 md:p-0 transition-transform font-semibold ${
           isMenuOpen ? "block" : "hidden md:flex"
