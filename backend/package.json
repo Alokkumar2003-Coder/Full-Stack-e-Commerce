@@ -1,25 +1,29 @@
 {
-  "name": "backend",
+  "name": "MERN e-commerce",
   "version": "1.0.0",
+  "description": "MERN Stack E-Commerce Project",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "backend": "nodemon backend/index.js",
+    "frontend": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend"
   },
-  "author": "",
+  "keywords": [],
+  "author": "HuXn WebDev",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "backend": "file:",
-    "bcrypt": "^5.1.1",
-    "cloudinary": "^2.6.0",
-    "cookie-parser": "^1.4.7",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^8.2.2",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "express-formidable": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.12.1",
-    "multer": "^1.4.5-lts.2",
-    "nodemon": "^3.1.9",
-    "redis": "^4.7.0"
+    "mongoose": "^7.6.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.1"
   }
 }

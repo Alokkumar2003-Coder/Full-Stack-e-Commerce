@@ -1,78 +1,117 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../components/Loader";
+import { useRegisterMutation } from "../../redux/api/usersApiSlice";
+import { setCredentials } from "../../redux/features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  const navigate = useNavigate();
-  const [data, setData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [username, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!data.username || !data.email || !data.password) {
-      return toast.error("All fields are required!");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search);
+  const redirect = sp.get("redirect") || "/";
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
     }
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/users/register",
-        data,
-        {
-          withCredentials: true,
-        }
-      );
-      toast.success(response.data.message);
-      navigate("/login");
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Registration failed!");
+  }, [navigate, redirect, userInfo]);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+    } else {
+      try {
+        const res = await register({ username, email, password }).unwrap();
+        dispatch(setCredentials({ ...res }));
+        navigate(redirect);
+        toast.success("User successfully registered");
+      } catch (err) {
+        console.log(err);
+        toast.error(err.data.message);
+      }
     }
   };
 
   return (
-    <div className="bg-gradient-to-r from-violet-300 to-indigo-500 h-screen flex justify-center items-center">
-      <ToastContainer position="top-right" draggable />
-      <div className="flex flex-col px-8 py-6 rounded-lg shadow-lg bg-white w-96">
-        <h1 className="text-2xl font-bold mb-6 mt-2">Register E-Sol</h1>
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter Username . . ."
-            className="border rounded p-2"
-            value={data.username}
-            onChange={(e) => setData({ ...data, username: e.target.value })}
-          />
-          <input
-            type="email"
-            placeholder="Enter Email . . ."
-            className="border rounded p-2"
-            value={data.email}
-            onChange={(e) => setData({ ...data, email: e.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="Enter Password . . ."
-            className="border rounded p-2"
-            value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
-          />
-          <Button
-            className="cursor-pointer rounded p-5 bg-red-600 hover:bg-red-700"
-            type="submit"
-          >
-            Register
-          </Button>
-          <p className="text-sm text-center">
-            Already have an account?{" "}
-            <Link to="/login" className="text-blue-500 font-semibold">
-              Login
-            </Link>
-          </p>
-        </form>
-      </div>
+    <div className="flex justify-center items-center h-screen">
+      <section className="border border-gray-300 rounded-lg p-6 w-96 shadow-lg">
+        <div className="">
+          <h1 className="text-2xl font-semibold mb-3">Register</h1>
+
+          <form onSubmit={submitHandler} className="flex flex-col gap-2">
+            <input
+              type="text"
+              id="name"
+              className="mt-1 p-2 border rounded w-full"
+              placeholder="Enter name"
+              value={username}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <input
+              type="email"
+              id="email"
+              className="mt-1 p-2 border rounded w-full"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <input
+              type="password"
+              id="password"
+              className="mt-1 p-2 border rounded w-full"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <input
+              type="password"
+              id="confirmPassword"
+              className="mt-1 p-2 border rounded w-full"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="bg-red-500 w-full text-white px-4 py-2 rounded cursor-pointer"
+            >
+              {isLoading ? "Registering..." : "Register"}
+            </button>
+          </form>
+
+          <div className="mt-2">
+            <p className="text-sm text-center">
+              Already have an account?{" "}
+              <Link
+                to={redirect ? `/login?redirect=${redirect}` : "/login"}
+                className="text-blue-500 hover:underline"
+              >
+                Login
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

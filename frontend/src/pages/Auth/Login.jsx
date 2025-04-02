@@ -1,73 +1,91 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../components/Loader";
+import { useLoginMutation } from "../../redux/api/usersApiSlice";
+import { setCredentials } from "../../redux/features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!data.email || !data.password) {
-      return toast.error("All fields are required!");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search);
+  const redirect = sp.get("redirect") || "/";
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
     }
+  }, [navigate, redirect, userInfo]);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/users/login",
-        data,
-        { withCredentials: true }
-      );
-  
-      localStorage.setItem("token", response.data.token); 
-  
-      const { isAdmin } = response.data;
-      navigate(isAdmin ? "/admin" : "/");
-      toast.success(response.data.message);
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed!");
+      const res = await login({ email, password }).unwrap();
+      console.log(res);
+      dispatch(setCredentials({ ...res }));
+      navigate(redirect);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
   };
-  
 
   return (
-    <div className="bg-gradient-to-r from-orange-300 to-red-500 h-screen flex justify-center items-center">
-      <ToastContainer position="top-right" draggable />
-      <div className="flex flex-col px-8 py-6 rounded-lg shadow-lg bg-white w-96">
-        <h1 className="text-2xl font-bold mb-6 mt-2">Login E-Sol</h1>
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Enter Email . . ."
-            className="border rounded p-2"
-            value={data.email}
-            onChange={(e) => setData({ ...data, email: e.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="Enter Password . . ."
-            className="border rounded p-2"
-            value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
-          />
-          <Button
-            className="cursor-pointer rounded p-5 bg-blue-600 hover:bg-blue-700"
-            type="submit"
-          >
-            Login
-          </Button>
-          <p className="text-sm text-center">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-red-600 font-semibold">
-              Register
-            </Link>
-          </p>
-        </form>
-      </div>
+    <div className="flex justify-center items-center h-screen">
+      <section className=" border border-gray-300 rounded-lg p-6 w-96 shadow-lg">
+        <div className="">
+          <h1 className="text-2xl font-semibold mb-3">Login</h1>
+
+          <form onSubmit={submitHandler} className="flex flex-col gap-2">
+            <input
+              type="email"
+              id="email"
+              className="mt-1 p-2 border rounded w-full"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <input
+              type="password"
+              id="password"
+              className="mt-1 p-2 border rounded w-full"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer w-full"
+            >
+              {isLoading ? "Logging In..." : "Login"}
+            </button>
+          </form>
+
+          <div className="mt-2">
+            <p className=" text-sm text-center">
+              Don't have an account?{" "}
+              <Link
+                to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                className="text-red-500 hover:underline"
+              >
+                Register
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
