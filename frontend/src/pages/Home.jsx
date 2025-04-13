@@ -10,7 +10,7 @@ const Home = () => {
   const { data, isLoading, error, isError } = useGetProductsQuery({ keyword });
 
   return (
-    <div className="w-full p-6">
+    <div className="w-full bg-[wheat] p-6">
       {!keyword && <Header />}
 
       {isLoading ? (
@@ -35,10 +35,7 @@ const Home = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {data?.products?.length > 0 ? (
               data.products.map((product) => (
-                <div
-                  key={product._id}
-                  className="p-4"
-                >
+                <div key={product._id} className="p-4">
                   <Product product={product} />
                 </div>
               ))

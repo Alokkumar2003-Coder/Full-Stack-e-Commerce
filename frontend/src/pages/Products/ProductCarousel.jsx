@@ -41,11 +41,11 @@ const ProductCarousel = () => {
             quantity,
             countInStock,
           }) => (
-            <div key={_id} className="p-4">
+            <div key={_id} className=" p-4">
               <img
                 src={image}
                 alt={name}
-                className="w-full rounded-lg object-cover h-[20rem] md:h-[25rem]"
+                className="w-full rounded-lg h-[20rem] md:h-[20rem]"
               />
             </div>
           ))}
