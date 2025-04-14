@@ -5,13 +5,15 @@
  */
 
 const MongooseMap = require('../types/map');
-const SchemaMapOptions = require('../options/SchemaMapOptions');
-const SchemaType = require('../schematype');
+const SchemaMapOptions = require('../options/schemaMapOptions');
+const SchemaType = require('../schemaType');
+const createJSONSchemaTypeDefinition = require('../helpers/createJSONSchemaTypeDefinition');
+
 /*!
  * ignore
  */
 
-class Map extends SchemaType {
+class SchemaMap extends SchemaType {
   constructor(key, options) {
     super(key, options, 'Map');
     this.$isSchemaMap = true;
@@ -67,6 +69,32 @@ class Map extends SchemaType {
     }
     return schematype;
   }
+
+  /**
+   * Returns the embedded schema type (i.e. the `.$*` path)
+   */
+  getEmbeddedSchemaType() {
+    return this.$__schemaType;
+  }
+
+  /**
+   * Returns this schema type's representation in a JSON schema.
+   *
+   * @param [options]
+   * @param [options.useBsonType=false] If true, return a representation with `bsonType` for use with MongoDB's `$jsonSchema`.
+   * @returns {Object} JSON schema properties
+   */
+
+  toJSONSchema(options) {
+    const useBsonType = options?.useBsonType;
+    const embeddedSchemaType = this.getEmbeddedSchemaType();
+
+    const isRequired = this.options.required && typeof this.options.required !== 'function';
+    const result = createJSONSchemaTypeDefinition('object', 'object', useBsonType, isRequired);
+    result.additionalProperties = embeddedSchemaType.toJSONSchema(options);
+
+    return result;
+  }
 }
 
 /**
@@ -75,10 +103,10 @@ class Map extends SchemaType {
  *
  * @api public
  */
-Map.schemaName = 'Map';
+SchemaMap.schemaName = 'Map';
 
-Map.prototype.OptionsConstructor = SchemaMapOptions;
+SchemaMap.prototype.OptionsConstructor = SchemaMapOptions;
 
-Map.defaultOptions = {};
+SchemaMap.defaultOptions = {};
 
-module.exports = Map;
+module.exports = SchemaMap;

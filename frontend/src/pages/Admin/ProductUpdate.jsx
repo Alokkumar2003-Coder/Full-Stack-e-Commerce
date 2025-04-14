@@ -98,7 +98,7 @@ const AdminProductUpdate = () => {
 
     try {
       const { data } = await deleteProduct(id);
-      toast.success(`"${data.name}" deleted`);
+      toast.success(`"${data.id}" deleted`);
       navigate("/admin/allproductslist");
     } catch (err) {
       toast.error("Delete failed");
