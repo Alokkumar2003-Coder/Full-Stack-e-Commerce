@@ -3,8 +3,6 @@ import Message from "../../components/Message";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import moment from "moment";
-import { FaBox, FaClock, FaShoppingCart, FaStar, FaStore } from "react-icons/fa";
 
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopProductsQuery();
@@ -15,7 +13,7 @@ const ProductCarousel = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
     autoplay: true,
     autoplaySpeed: 3000,
   };
@@ -27,25 +25,17 @@ const ProductCarousel = () => {
           {error?.data?.message || error.error}
         </Message>
       ) : (
-        <Slider {...settings} className="w-full mx-auto">
+        <Slider {...settings} className="w-full">
           {products.map(({
             image,
             _id,
             name,
-            price,
-            description,
-            brand,
-            createdAt,
-            numReviews,
-            rating,
-            quantity,
-            countInStock,
           }) => (
-            <div key={_id} className=" p-4">
+            <div key={_id} className="">
               <img
                 src={image}
                 alt={name}
-                className="w-full rounded-lg h-[20rem] md:h-[20rem]"
+                className="w-full h-40 md:h-[30rem] object-cover"
               />
             </div>
           ))}
