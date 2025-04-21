@@ -17,25 +17,25 @@ const ProductCard = ({ p }) => {
   };
 
   return (
-    <div className="max-w-sm relative border bg-black rounded-lg p-2">
+    <div className="max-w-sm relative p-1 bg-gray-800 rounded-lg">
       <section className="relative">
         <Link to={`/product/${p._id}`}>
           <span className="absolute bottom-3 right-3 bg-yellow-100 text-red-600 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-pink-900 dark:text-pink-300">
             {p?.brand}
           </span>
           <img
-            className="cursor-pointer w-full rounded-lg"
+            className="cursor-pointer w-full rounded-lg h-200 object-cover"
             src={p.image}
             alt={p.name}
-            style={{ height: "300px", objectFit: "cover" }}
+            
           />
         </Link>
-        <HeartIcon product={p} />
+        <HeartIcon product={p}/>
       </section>
 
       <div className="p-5">
         <div className="flex justify-between">
-          <h5 className="mb-2 text-xl text-white dark:text-white">{p?.name}</h5>
+          <h5 className="mb-2 text-md text-white dark:text-white">{p?.name}</h5>
 
           <p className=" font-semibold text-green-500">
             {p?.price?.toLocaleString("en-US", {
@@ -45,14 +45,14 @@ const ProductCard = ({ p }) => {
           </p>
         </div>
 
-        <p className="mb-3 font-normal text-[#CFCFCF]">
+        <p className="mb-3 font-normal text-[#CFCFCF] text-xs">
           {p?.description?.substring(0, 60)} ...
         </p>
 
         <section className="flex justify-between items-center">
           <Link
             to={`/product/${p._id}`}
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
           >
             Read More
             <svg

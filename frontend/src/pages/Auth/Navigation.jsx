@@ -36,18 +36,18 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-black text-white w-full">
+    <nav className="flex justify-between items-center p-4 bg-gray-800 text-white w-full">
       <div className="flex space-x-4 items-center">
-        <Link to="/" className="hover:text-gray-300">
+        <Link to="/" className="hover:text-green-300">
           <AiOutlineHome size={26} />
         </Link>
-        <Link to="/shop" className="hover:text-gray-300">
+        <Link to="/shop" className="hover:text-green-300">
           <AiOutlineShopping size={26} />
         </Link>
-        <Link to="/cart" className="relative hover:text-gray-300">
+        <Link to="/cart" className="relative hover:text-green-300">
           <AiOutlineShoppingCart size={26} />
           {cartItems.length > 0 && (
-            <span className="absolute top-0 right-0 px-1 text-sm bg-pink-500 rounded-full">
+            <span className="absolute top-0 right-0 px-1 text-sm bg-red-500 rounded-full">
               {cartItems.reduce((a, c) => a + c.qty, 0)}
             </span>
           )}
@@ -59,27 +59,27 @@ const Navigation = () => {
       </div>
       <div className="relative">
         {userInfo ? (
-          <button onClick={toggleDropdown} className="focus:outline-none">
+          <button onClick={toggleDropdown} className="bg-green-600 p-2 rounded-lg">
             {userInfo.username}
           </button>
         ) : (
           <div className="flex space-x-4">
-            <Link to="/login" className="hover:text-gray-300">
+            <Link to="/login" className="hover:text-green-300">
               <AiOutlineLogin size={26} />
             </Link>
-            <Link to="/register" className="hover:text-gray-300">
+            <Link to="/register" className="hover:text-green-300">
               <AiOutlineUserAdd size={26} />
             </Link>
           </div>
         )}
         {dropdownOpen && userInfo && (
-          <ul className="w-36 z-50 absolute right-0 mt-2 bg-white text-gray-600 p-2 shadow-lg rounded-lg">
+          <ul className="w-36 z-50 absolute right-0 mt-2 bg-white text-green-600 p-2 shadow-lg rounded-lg">
             {userInfo.isAdmin && (
               <>
                 <li>
                   <Link
                     to="/admin/dashboard"
-                    className="block px-4 py-2 hover:bg-gray-200"
+                    className="block px-4 py-2 hover:bg-green-200"
                   >
                     Dashboard
                   </Link>
@@ -87,14 +87,14 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/productlist"
-                    className="block px-4 py-2 hover:bg-gray-200"
+                    className="block px-4 py-2 hover:bg-green-200"
                   >
                     Products
                   </Link>
                 </li>
                 <li>
                   <Link
-                    className="block px-4 py-2 hover:bg-gray-200"
+                    className="block px-4 py-2 hover:bg-green-200"
                     to="/admin/allproductslist"
                   >
                     All Products
@@ -103,7 +103,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/categorylist"
-                    className="block px-4 py-2 hover:bg-gray-200"
+                    className="block px-4 py-2 hover:bg-green-200"
                   >
                     Category
                   </Link>
@@ -111,7 +111,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/orderlist"
-                    className="block px-4 py-2 hover:bg-gray-200"
+                    className="block px-4 py-2 hover:bg-green-200"
                   >
                     Orders
                   </Link>
@@ -119,7 +119,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/userlist"
-                    className="block px-4 py-2 hover:bg-gray-200"
+                    className="block px-4 py-2 hover:bg-green-200"
                   >
                     Users
                   </Link>
@@ -127,14 +127,14 @@ const Navigation = () => {
               </>
             )}
             <li>
-              <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">
+              <Link to="/profile" className="block px-4 py-2 hover:bg-green-200">
                 Profile
               </Link>
             </li>
             <li>
               <button
                 onClick={logoutHandler}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                className="block w-full text-left px-4 py-2 hover:bg-green-200"
               >
                 Logout
               </button>

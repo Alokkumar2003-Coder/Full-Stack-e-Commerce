@@ -67,7 +67,7 @@ const Product = () => {
     <div className="p-6 flex justify-center">
       <div>
         <Link
-          className="text-white font-semibold hover:underline ml-[10rem]"
+          className="text-green-500 font-semibold hover:underline ml-[10rem]"
           to="/"
         >
           Go Back

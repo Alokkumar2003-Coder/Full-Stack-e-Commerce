@@ -77,7 +77,7 @@ const Shop = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto ">
       {/* Toggle Button for Mobile */}
       <div className="md:hidden flex justify-end p-2">
         <button
@@ -88,18 +88,18 @@ const Shop = () => {
         </button>
       </div>
 
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row ">
         {/* Sidebar / Filters Section */}
         <div
           className={`${
             isFilterVisible ? "block" : "hidden"
-          } md:block md:w-1/4 border shadow-lg rounded-lg p-3 mt-2 mb-2`}
+          } md:block md:w-1/4 border shadow-lg rounded-lg p-3 mt-2 mb-2 bg-gray-800 text-white`}
         >
-          <h2 className="h4 text-center py-2 bg-blue-200 rounded-full mb-2">
+          <h2 className="h4 text-center py-2 bg-green-600 rounded-full mb-2">
             Filter by Categories
           </h2>
 
-          <div className="p-5">
+          <div className="p-5 ">
             {categories?.map((c) => (
               <div key={c._id} className="mb-2">
                 <div className="flex items-center">
@@ -116,7 +116,7 @@ const Shop = () => {
             ))}
           </div>
 
-          <h2 className="h4 text-center py-2 bg-blue-200 rounded-full mb-2">
+          <h2 className="h4 text-center py-2 bg-green-600 rounded-full mb-2">
             Filter by Brands
           </h2>
 
@@ -137,7 +137,7 @@ const Shop = () => {
             ))}
           </div>
 
-          <h2 className="h4 text-center py-2 bg-blue-200 rounded-full mb-2">
+          <h2 className="h4 text-center py-2 bg-green-600 rounded-full mb-2">
             Filter by Price
           </h2>
 
