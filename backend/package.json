@@ -13,7 +13,7 @@
   "node": "20.x"
 },
   "keywords": [],
-  "author": "HuXn WebDev",
+  "author": "Himalaya & Alok",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
