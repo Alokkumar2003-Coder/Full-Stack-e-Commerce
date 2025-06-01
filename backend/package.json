@@ -9,6 +9,9 @@
     "frontend": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run frontend\" \"npm run backend"
   },
+  "engines": {
+  "node": "20.x"
+},
   "keywords": [],
   "author": "HuXn WebDev",
   "license": "ISC",
