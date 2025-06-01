@@ -24,12 +24,17 @@
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "express-formidable": "^1.2.0",
-    "gopd": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.1",
     "readable-stream": "^4.7.0"
+  },
+  "resolutions": {
+    "gopd": "^1.0.1"
+  },
+  "devDependencies": {
+    "npm-force-resolutions": "^0.0.10"
   }
 }
