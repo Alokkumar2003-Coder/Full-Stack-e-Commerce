@@ -21,7 +21,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173",  
+  origin: "https://full-stack-e-commerce-x3de.vercel.app",  
   credentials: true,                
 }));
 
