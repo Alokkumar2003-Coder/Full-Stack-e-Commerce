@@ -7,14 +7,9 @@
   "scripts": {
     "backend": "nodemon backend/index.js",
     "frontend": "npm run dev --prefix frontend",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend"
-  },
-  {
-  "scripts": {
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
     "start": "node index.js"
-  }
-}
-
+  },
   "engines": {
     "node": "20.x"
   },
