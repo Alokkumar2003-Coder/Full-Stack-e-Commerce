@@ -9,6 +9,12 @@
     "frontend": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run frontend\" \"npm run backend"
   },
+  {
+  "scripts": {
+    "start": "node index.js"
+  }
+}
+
   "engines": {
     "node": "20.x"
   },
