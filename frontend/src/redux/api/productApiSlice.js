@@ -48,6 +48,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Products"],
     }),
+    
 
     uploadProductImage: builder.mutation({
       query: (data) => ({

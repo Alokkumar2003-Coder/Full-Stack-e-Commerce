@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import AdminMenu from "./AdminMenu";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useUpdateProductMutation,
@@ -68,7 +67,7 @@ const AdminProductUpdate = () => {
 
     try {
       const updatedProduct = {
-        _id: id,
+        productId: id,
         name,
         description,
         price,

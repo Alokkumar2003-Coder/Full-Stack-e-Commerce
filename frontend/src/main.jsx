@@ -61,7 +61,7 @@ const router = createBrowserRouter(
         <Route path="productlist" element={<ProductList />} />
         <Route path="allproductslist" element={<AllProducts />} />
         <Route path="productlist/:pageNumber" element={<ProductList />} />
-        <Route path="product/update/:_id" element={<ProductUpdate />} />
+        <Route path="product/update/:id" element={<ProductUpdate />} />
         <Route path="orderlist" element={<OrderList />} />
         <Route path="dashboard" element={<AdminDashboard />} />
       </Route>

@@ -11,7 +11,7 @@ const Favorites = () => {
         FAVORITE PRODUCTS
       </h1>
 
-      <div className="flex ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {favorites.map((product) => (
           <Product key={product._id} product={product} />
         ))}
