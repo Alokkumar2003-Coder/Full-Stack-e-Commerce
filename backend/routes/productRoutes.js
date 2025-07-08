@@ -38,7 +38,6 @@ router.put(
   authenticate,
   authorizeAdmin,
   checkId,
-  formidable(),
   updateProductDetails
 );
 router.delete("/:id", authenticate, authorizeAdmin, checkId, removeProduct);

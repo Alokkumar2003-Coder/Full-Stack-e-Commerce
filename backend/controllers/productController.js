@@ -38,7 +38,7 @@ const updateProductDetails = asyncHandler(async (req, res) => {
       return res.status(400).json({ error: "Invalid product ID" });
     }
 
-    const { name, description, price, category, quantity, brand } = req.fields;
+    const { name, description, price, category, quantity, brand } = req.body;
 
     // Validation
     switch (true) {
@@ -58,7 +58,7 @@ const updateProductDetails = asyncHandler(async (req, res) => {
 
     const product = await Product.findByIdAndUpdate(
       req.params.id,
-      { ...req.fields },
+      { ...req.body },
       { new: true }
     );
 
