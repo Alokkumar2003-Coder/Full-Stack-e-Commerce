@@ -1,7 +1,7 @@
 # 🌟 MERN E-Commerce
 
 ## 🚀 Overview
-Welcome to the **MERN E-Commerce** project! This is a modern, high-performance e-commerce platform built with the **MERN (MongoDB, Express.js, React, Node.js) stack**. It features a **beautiful UI** using **Tailwind CSS & ShadCN UI** and optimized backend performance with **Redis caching**.
+Welcome to the **MERN E-Commerce** project! This is a modern, high-performance e-commerce platform built with the **MERN (MongoDB, Express.js, React, Node.js) stack**. It features a **beautiful UI** using **Tailwind CSS & ShadCN UI** and optimized backend performance with **Database caching**.
 
 ## ✨ Features
 - **User Authentication** (JWT / Clerk)
@@ -22,7 +22,6 @@ Welcome to the **MERN E-Commerce** project! This is a modern, high-performance e
 ### 🔧 Backend:
 - **Node.js & Express.js** – RESTful API
 - **MongoDB & Mongoose** – NoSQL database
-- **Redis** – Caching and session management
 - **JWT / Clerk** – Secure authentication
 
 ### 🌍 Deployment:
